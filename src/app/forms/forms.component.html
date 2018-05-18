@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-2 col-md-offset-1">
+      <form (ngSubmit)="submitForm()" #f="ngForm">
+        <div class="form-group">
+          <label for="username">UserName</label>
+            <input type="text" class="form-control" ngModel required id="username" name="username"/>
+            <button class="btn-default">Suggest an UserName</button>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+            <input type="email" class="form-control" ngModel required email id="email" name="email" #emaillocalRef="ngModel"/>
+        </div>
+        <span class="help-block" *ngIf="!emaillocalRef.valid && emaillocalRef.touched">Please enter valid email</span>
+        
+        <div class="form-group">
+          <label for="secretQuestion">Secret Question</label>
+          <select name="secreatQuestion" id="secreatQuestion" class="form-control" [(ngModel)]="defaultQuestion">
+            <option value="car">My First Car?</option>
+            <option value="school">My First School?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea name="question" id="question" [(ngModel)]="answer"></textarea>
+          <span>{{answer}}</span>
+        </div>
+        <div class="form-group">
+          <div *ngFor="let gender of genders">
+            <input type="radio" [value]="gender" id="gender" ngModel name="gender" />{{gender}}
+          </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+      </form>
+    </div>
+    <div *ngIf="hasFormSubmitted">
+      username = {{user.username}} <br>
+      email = {{user.email}} <br>
+      secreatQuestion = {{user.secreatQuestion}} <br>
+      question = {{user.question}} <br>
+      gender = {{user.gender}}
+    </div>
+  </div>
+</div>
